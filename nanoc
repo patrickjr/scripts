@@ -7,7 +7,7 @@ if [ $# == 1 ]
   then
     if [ -e "$1.c" ]
       then
-        nano "$1.c"
+        nano "$1.c" -ET 2
       else
         DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
         . $DIR/nanoc_files/variables
