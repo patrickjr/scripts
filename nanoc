@@ -1,0 +1,22 @@
+#!/bin/bash
+if [ $# == 0 ]
+  then
+    nano
+fi
+if [ $# == 1 ]
+  then
+    if [ -e "$1.c" ]
+      then
+        nano "$1.c"
+      else
+        DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+        . $DIR/nanoc_files/variables
+        time=$(date +"%m-%d-%y")
+        cat "$DIR/nanoc_files/header" >> "$1.c"
+        sed -i s/"{{author}}"/"$my_name"/g "$1.c"
+        sed -i s/"{{date}}"/"$time"/g "$1.c"
+        sed -i s/"{{program_name}}"/"$1.c"/g "$1.c"
+        cat "$DIR/nanoc_files/c_std" >> "$1.c"
+        nano "$1.c" -ET 2
+    fi
+fi
