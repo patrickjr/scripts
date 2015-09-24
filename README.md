@@ -4,4 +4,4 @@
 
 # runc
 
-  compiles and runs a c file wiht gcc
+  compiles and runs a c file with gcc
