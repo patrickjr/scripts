@@ -6,20 +6,36 @@ function go_install(){
     if [ $result == "success" ]
     then
       sudo tar -C /usr/local -xzf go1.5.2.linux-amd64.tar.gz
-      sudo mkdir -p $HOME/workspace/go
-      sudo mkdir -p $HOME/workspace/go/bin
-      sudo mkdir -p $HOME/workspace/go/src
-      sudo mkdir -p $HOME/workspace/go/pkg
+      mkdir -p $HOME/workspace/go
+      mkdir -p $HOME/workspace/go/bin
+      mkdir -p $HOME/workspace/go/src
+      mkdir -p $HOME/workspace/go/pkg
+      mkdir -p $HOME/workspace/go/src/github.com
       export GOPATH=$HOME/workspace/go
       export PATH=$PATH:/usr/local/go/bin
       export PATH=$PATH:$GOPATH/bin
       rm go1.5.2.linux-amd64.tar.gz
+      source $HOME/.profile
+      __httprouter
+      __gorilla
     else
        echo "unable to find go download"
     fi
 }
 
-function get_go(){
+__httprouter(){
+  go get github.com/julienschmidt/httprouter
+}
+
+__gorilla(){
+  go get github.com/gorilla/context
+  go get github.com/gorilla/sessions
+  go get github.com/gorilla/websocket
+  go get github.com/gorilla/securecookie
+  go get github.com/gorilla/mux
+
+}
+__get_go(){
   wget https://storage.googleapis.com/golang/go1.5.2.linux-amd64.tar.gz
   if [ $? -eq 0 ]
   then
