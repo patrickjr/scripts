@@ -2,7 +2,7 @@
 
 
 function go_install(){
-    result=$(get_go)
+    result=$(__get_go)
     if [ $result == "success" ]
     then
       sudo tar -C /usr/local -xzf go1.5.2.linux-amd64.tar.gz
